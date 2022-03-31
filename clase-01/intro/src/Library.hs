@@ -1,17 +1,42 @@
 module Library where
 import PdePreludat
 
+-- REPL / Intérprete
+-- Read. Evaluate. Print. Loop
+
+-- f : |R -> |R
+-- f(x) = x + x
+-- g(x) = x * 3
 doble :: Number -> Number
 doble numero = numero + numero
 
-perimetroCirculo = implementame
+triple :: Number -> Number
+triple numero = numero * 3
 
-perimetroCuadrado = implementame
+perimetroCirculo :: Number -> Number
+perimetroCirculo radio = 2 * pi * radio
 
-superficieCuadrado = implementame
+perimetroCuadrado :: Number -> Number
+perimetroCuadrado lado = lado * 4
 
-superficieCubo = implementame
+superficieCuadrado :: Number -> Number
+superficieCuadrado lado = lado * lado
 
-superficieCilindro = implementame
+superficieCubo :: Number -> Number
+superficieCubo lado = superficieCuadrado lado * 6
 
-superficieCirculo = implementame
+superficieCilindro :: Number -> Number -> Number
+superficieCilindro radio altura =
+    superficieTuboDelCilindro radio altura +
+    superficieTapasDelCilindro radio
+
+superficieTuboDelCilindro :: Number -> Number -> Number
+superficieTuboDelCilindro radio altura =
+    perimetroCirculo radio * altura
+
+superficieTapasDelCilindro :: Number -> Number
+superficieTapasDelCilindro radio =
+    2 * superficieCirculo radio
+
+superficieCirculo :: Number -> Number
+superficieCirculo radio = pi * radio ^^ 2

@@ -2,14 +2,7 @@ module Library where
 import PdePreludat
 import Data.List (isPrefixOf, isSuffixOf)
 
--- Tomas
--- Carolina
--- Joaquin
--- Manuel
--- Juani
--- Franco
--- Martin
--- Matias
+-- hola, estoy cambiando algo
 
 -- versión refactorizada (mas declarativa):
 preguntar :: String -> String

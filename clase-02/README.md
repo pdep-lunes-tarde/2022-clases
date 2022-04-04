@@ -3,12 +3,11 @@
 ## Material de la clase
 
 - Clase grabada: _**Proximamente**_
-- Slides: https://docs.google.com/presentation/d/1KhufAzlT-1C-ynmg8LDGBF9BY4MKGWIk253Is91lgOE/edit?usp=sharing
+- Slides: https://docs.google.com/presentation/d/19U1WsoftMn5ov38h5IneV0OySJNk2ZO-6jBXp8biYGE/edit?usp=sharing
 - Código: Acá mismo :D.
 
 ## Para la clase que viene
 
-- Armar grupos de 3 y mandarme integrantes y nombre del grupo a mi mail o por discord!
 - Hacer el [TP-1](https://classroom.github.com/g/qulXkdSR)
 
 ## ¿Qué mas puedo leer, ver o practicar?

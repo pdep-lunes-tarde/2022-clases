@@ -11,19 +11,25 @@ import Data.List (isPrefixOf, isSuffixOf)
 -- Martin
 -- Matias
 
--- versión refactorizada:
+-- versión refactorizada (mas declarativa):
 preguntar :: String -> String
 preguntar oracion = agregarSignoDePreguntaQueAbre (agregarSignoDePreguntaQueCierra oracion)
 
 agregarSignoDePreguntaQueCierra :: String -> String
 agregarSignoDePreguntaQueCierra oracion
-    | not (isSuffixOf "?" oracion) = oracion ++ "?"
+    | not (tieneSignoDePreguntaQueCierra oracion) = oracion ++ "?"
     | otherwise = oracion
 
 agregarSignoDePreguntaQueAbre :: String -> String 
 agregarSignoDePreguntaQueAbre oracion
-    | not (isPrefixOf  "¿" oracion) = "¿" ++ oracion
+    | not (tieneSignoDePreguntaQueAbre oracion) = "¿" ++ oracion
     | otherwise = oracion
+
+tieneSignoDePreguntaQueCierra :: String -> Bool
+tieneSignoDePreguntaQueCierra oracion = isSuffixOf "?" oracion
+
+tieneSignoDePreguntaQueAbre :: String -> Bool
+tieneSignoDePreguntaQueAbre oracion = isPrefixOf "¿" oracion
 
 -- versión sin refactorizar:
 preguntar' :: String -> String

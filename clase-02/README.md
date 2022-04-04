@@ -8,7 +8,7 @@
 
 ## Para la clase que viene
 
-- Hacer el [TP-1](https://classroom.github.com/g/qulXkdSR)
+- Hacer el [TP-1](https://classroom.github.com/a/hWNNeNip)
 
 ## ¿Qué mas puedo leer, ver o practicar?
 

@@ -5,12 +5,12 @@
 ## Material de la clase
 
 - Clase grabada: _**Proximamente**_
-- Slides: https://docs.google.com/presentation/d/1k7KHP0NDSHJeki3H_MKjACYSJ5iXq7fb5P4niwZwz6k/edit?usp=sharing
+- Slides: https://docs.google.com/presentation/d/1reJpH5yqdqpP6kZgXinemLXByD1gqq7iD-ip87MFxBo/edit?usp=sharing
 - Código: Acá mismo :D.
 
 ## Para la clase que viene
 
-- Hacer el [TP-3](https://classroom.github.com/g/VTpX2ccA)
+- Hacer el [TP-3](https://classroom.github.com/a/6r32LfdX)
 
 ## ¿Qué mas puedo leer, ver o practicar?
 

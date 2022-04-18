@@ -10,6 +10,8 @@ data Carta =
     CartaEspecial { simbolo :: Simbolo, color :: Color }
     deriving (Eq, Show)
 
+ochoRojo = CartaNumerica 8 Rojo
+
 sePuedeJugar :: Carta -> Carta -> Bool
 sePuedeJugar _ (CartaEspecial Mas4 _) = True
 sePuedeJugar unaCarta otraCarta =
@@ -32,14 +34,31 @@ otrasCartas = CartaNumerica 3 Rojo : CartaNumerica 9 Verde : CartaNumerica 0 Azu
 
 -- >>> ultimaCarta unasCartas
 -- CartaNumerica 1 Verde
-ultimaCarta = implementame
+ultimaCarta :: [Carta] -> Carta -- last
+ultimaCarta [unaCarta] = unaCarta
+ultimaCarta (_ : otrasCartas) = ultimaCarta otrasCartas
 
--- >>> primeras 1 unasCartas
--- [CartaNumerica 0 Azul]
+-- ultimaCarta (unoRojo : dosVerde : tresAzul : [])
+-- ultimaCarta (dosVerde : tresAzul : [])
+-- ultimaCarta (tresAzul : [])
+-- tresAzul
+
 -- >>> primeras 2 unasCartas
 -- [CartaNumerica 0 Azul, CartaNumerica 1 Azul]
-primeras n cartas = implementame
+primeras :: Number -> [Carta] -> [Carta] -- take
+primeras 0 _ = []
+primeras _ [] = []
+primeras n (carta : cartas) = carta : primeras (n-1) cartas
 
 -- >>> cartasAColores unasCartas
 -- [Azul, Azul, Verde]
-cartasAColores cartas = implementame
+
+cartasAColores :: [Carta] -> [Color]
+cartasAColores [] = []
+cartasAColores (carta : otrasCartas) = color carta : cartasAColores otrasCartas
+
+-- cartasAColores (CartaNumerica 3 Rojo : CartaNumerica 4 Verde : CartaNumerica 5 Azul : [])
+-- color (CartaNumerica 3 Rojo) : cartasAColores (CartaNumerica 4 Verde : CartaNumerica 5 Azul : [])
+-- Rojo : color (CartaNumerica 4 Verde) : cartasAColores (CartaNumerica 5 Azul : [])
+-- Rojo : Verde : color (CartaNumerica 5 Azul) : cartasAColores []
+-- Rojo : Verde : Azul : []

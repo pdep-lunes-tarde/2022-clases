@@ -1,11 +1,17 @@
 module Library where
 import PdePreludat
 
-data Entrenador = Entrenador { cantidadPokebolas :: Number, pokemons :: [Pokemon] } deriving(Eq, Show)
+data Entrenador = Entrenador { 
+    cantidadPokebolas :: Number, 
+    pokemons :: [Pokemon] 
+    } deriving(Eq, Show)
 
 data Tipo = Electrico | Fuego | Agua deriving(Eq, Show)
 
-data Pokemon = Pokemon { tipo :: Tipo, experiencia :: Number } deriving(Eq, Show)
+data Pokemon = Pokemon { 
+    tipo :: Tipo, 
+    experiencia :: Number 
+    } deriving(Eq, Show)
 
 pikachu :: Pokemon
 pikachu = Pokemon Electrico 0
@@ -33,7 +39,7 @@ losDeTipo unTipo pokemons = filter (\pokemon -> esDeTipo unTipo pokemon) pokemon
 
 -------------------------------------
 
-entrenarEquipo = implementame 
+entrenarEquipo = implementame
 
 atraparHorda = implementame
 

@@ -4,13 +4,12 @@
 
 ## Material de la clase
 
-- Clase grabada: _**Proximamente**_
-- Slides: https://docs.google.com/presentation/d/1hg_YHbh2zrO0HC_sfyzePymSlDYjoiqUJcHxlvf4BW0/edit?usp=sharing
+- Slides: https://docs.google.com/presentation/d/1Bd_PZfHxWqmPF7mUIf13aJdyswZobK2QpOTzFUC0Un8/edit?usp=sharing
 - Código: Acá mismo :D.
 
 ## Para la clase que viene
 
-- Hacer el TP-4 (poner link de TP 4 cuando esté)
+- Hacer el [TP-4](https://classroom.github.com/a/tlwmDWRk)
 
 ## ¿Qué mas puedo leer, ver o practicar?
 

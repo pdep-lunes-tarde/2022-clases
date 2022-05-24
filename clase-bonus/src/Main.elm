@@ -4,9 +4,10 @@ module Main exposing (..)
 import Browser
 import Html exposing (Html, button, div, text, span, input)
 import Html.Events exposing (onClick, onInput)
-import String exposing (length, toList, concat)
-import List exposing (member, map, indexedMap, head, drop)
-import Tuple exposing (pair)
+import Html.Attributes exposing (style)
+import String exposing (length, fromChar)
+import List exposing (map)
+import VerificarPalabra exposing (..)
 
 -- MAIN
 
@@ -23,7 +24,7 @@ main =
 type alias Model = {
   palabra : String
   , intento : String
-  , resultado : String
+  , resultado : Resultado
   , cantIntentos : Int
   }
 
@@ -32,7 +33,7 @@ init : Model
 init = {
     palabra = "hola"
     , intento = ""
-    , resultado = ""
+    , resultado = []
     , cantIntentos = 5
   }
 
@@ -54,7 +55,7 @@ update msg model =
       if length str > 5 then model else {
         palabra = str,
         intento = "",
-        resultado = "",
+        resultado = [],
         cantIntentos = model.cantIntentos}
     ChequearPalabra -> case (model.cantIntentos - 1) > 0 of
       True ->    
@@ -65,46 +66,40 @@ update msg model =
       False ->    
         { palabra = model.palabra,
         intento = model.intento,
-        resultado = "perdiste",
+        resultado = model.resultado,
         cantIntentos = 0 }
     CambiarIntento str ->
       { palabra = model.palabra,
         intento = str,
-        resultado = "",
+        resultado = [],
         cantIntentos = model.cantIntentos}
      
-chequear : String -> String -> String
-chequear palabra intento =
-  if palabra == intento then "ganaste" else
-  (concat << map (verSiEstaEn palabra) << indexedMap pair << toList) intento
 
-verSiEstaEn : String -> (Int, Char) -> String
-verSiEstaEn palabra tupla = (determinarCaracter tupla << toList) palabra
-
-determinarCaracter : (Int, Char) -> List Char -> String
-determinarCaracter (indice, caracter) lista =
-  case (getAt indice lista) == Just caracter of
-    True -> "Verde "
-    False -> case member caracter lista of
-      True -> "Amarillo "
-      False -> "Gris "
-
-getAtOr : Int ->  a -> List a  -> a
-getAtOr indice default lista = case getAt indice lista of
-  Just x -> x
-  Nothing -> default
-
-getAt : Int -> List a -> Maybe a
-getAt indice = head << drop indice
 
 -- VIEW
 
+-- mover el style a CSS (¿o no? ¿qué queda más funcional?)
 
 view : Model -> Html Msg
 view model =
-  div [] [
+  div 
+  [ style "display" "flex", style "flex-direction" "column" ] [
     input [ onInput CambiarPalabra ] []
     , input [ onInput CambiarIntento ] []
     , button [ onClick ChequearPalabra ] [ text "chequear" ]
-    , span [] [ text model.resultado ] -- aca deberia hacer cuadraditos
+    , div [ style "display" "flex", style "flex-direction" "row" ] (map vistaResultado model.resultado) 
   ]
+
+vistaResultado : Verificacion -> Html Msg
+vistaResultado unaVerificacion = div 
+  [ style "background-color" (obtenerColor unaVerificacion)
+  , style "height" "100px"
+  , style "width" "100px" ] 
+  [ text (fromChar unaVerificacion.letra) ]
+
+obtenerColor : Verificacion -> String
+obtenerColor unaVerificacion = 
+  case unaVerificacion.color of
+      Verde -> "green"
+      Amarillo -> "yellow"
+      Gris -> "grey"

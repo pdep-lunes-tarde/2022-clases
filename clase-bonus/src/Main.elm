@@ -19,7 +19,7 @@ main =
 
 -- MODEL
 
-
+-- tipo Model también incluye pantallas para victoria y derrota
 type Model =
   Preparando { palabra : String } | 
   Jugando 
@@ -47,6 +47,8 @@ type Msg
   | ChequearPalabra
   | VolverAlInicio
 
+-- líneas 72, 83, 90, 97: para completar casos de pattern matching. ¿Es necesario?
+
 update : Msg -> Model -> Model
 update msg model =
   case (msg, model) of
@@ -69,12 +71,16 @@ update msg model =
     (VolverAlInicio, _) -> init
     _ -> model
 
+-- ¿qué mejor nombre puede tener esta función?
 cambiarAFinal : Model -> Model
 cambiarAFinal model = case model of
-    Jugando unModel ->
-      if unModel.cantIntentos == 0 then Derrota
-      else if gano unModel.resultado then Victoria else model
-    _ -> model
+  Jugando unModel ->
+    if unModel.cantIntentos == 0 then 
+      Derrota
+    else if gano unModel.resultado then 
+      Victoria
+    else model
+  _ -> model
 
 cambiarResultado : Model -> Model
 cambiarResultado model = case model of
@@ -127,7 +133,7 @@ vistaResultado unaVerificacion = div
 
 obtenerColor : Verificacion -> String
 obtenerColor unaVerificacion = 
-  case unaVerificacion.color of
+  case unaVerificacion.posicion of
     LugarCorrecto -> "green"
     LugarIncorrecto -> "yellow"
     NoEsta -> "grey"

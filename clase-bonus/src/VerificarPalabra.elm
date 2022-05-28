@@ -8,13 +8,15 @@ type alias Resultado = List Verificacion
 
 type alias Verificacion = 
     { letra : Char
-    , color : Color
+    , posicion : Posicion
     }
 
-type Color = NoEsta | LugarIncorrecto | LugarCorrecto
+-- al menos es mejor que color... no estoy muy seguro igual
+type Posicion = NoEsta | LugarIncorrecto | LugarCorrecto
 
 gano : Resultado -> Bool
-gano resultado = all ((\unColor -> unColor == LugarCorrecto) << .color) resultado
+gano resultado = all ((\unColor -> unColor == LugarCorrecto) << .posicion) resultado
+-- ¿se puede evitar esta lambda?
 
 chequear : String -> String -> Resultado
 chequear palabra intento =
@@ -23,16 +25,17 @@ chequear palabra intento =
 verSiEstaEn : String -> (Int, Char) -> Verificacion
 verSiEstaEn palabra tupla = (determinarCaracter tupla << toList) palabra
 
-determinarColor : (Int, Char) -> List Char -> Color
-determinarColor (indice, caracter) lista =
-  case (getAt indice lista) == Just caracter of
-    True -> LugarCorrecto
-    False -> case member caracter lista of
-      True -> LugarIncorrecto
-      False -> NoEsta
+determinarPosicion : (Int, Char) -> List Char -> Posicion
+determinarPosicion (indice, caracter) lista =
+  if (getAt indice lista) == Just caracter 
+  then
+    LugarCorrecto
+  else if member caracter lista then
+    LugarIncorrecto
+  else NoEsta
 
 determinarCaracter : (Int, Char) -> List Char -> Verificacion
-determinarCaracter (indice, caracter) lista = {letra = caracter, color = determinarColor (indice, caracter) lista}
+determinarCaracter (indice, caracter) lista = {letra = caracter, posicion = determinarPosicion (indice, caracter) lista}
 
 getAt : Int -> List a -> Maybe a
 getAt indice = head << drop indice

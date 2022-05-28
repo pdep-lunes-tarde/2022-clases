@@ -31,7 +31,7 @@ type alias Model = {
 
 init : Model
 init = {
-    palabra = "hola"
+    palabra = ""
     , intento = ""
     , resultado = []
     , cantIntentos = 5
@@ -53,21 +53,16 @@ update msg model =
   case msg of
     CambiarPalabra str ->
       if length str > 5 then model else 
-        { palabra = str
-        , intento = ""
-        , resultado = model.resultado
-        , cantIntentos = model.cantIntentos }
+        { model | palabra = str }
     ChequearPalabra -> case model.cantIntentos > 0 of
+    -- hacer composición
       True ->    
         { palabra = model.palabra
         , intento = model.intento
         , resultado = chequear model.palabra model.intento
         , cantIntentos = model.cantIntentos - 1 }
       False ->    
-        { palabra = model.palabra
-        , intento = model.intento
-        , resultado = model.resultado
-        , cantIntentos = 0 }
+        model
     CambiarIntento str ->
       { palabra = model.palabra
       , intento = str
@@ -82,12 +77,16 @@ view : Model -> Html Msg
 view model =
   div 
   [ class "padre" ] [
-    input [ onInput CambiarPalabra ] []
-    , input [ onInput CambiarIntento ] []
+    --if () then input [ onInput CambiarPalabra ] [] else nada
+    --, button [ onInput ElegirPalabra ] [] para elegir la palabra y después esconder el primer text input
+    input [ onInput CambiarIntento ] []
     , button [ onClick ChequearPalabra ] [ text "chequear" ]
     , span [] [ text ("intentos restantes: " ++ fromInt model.cantIntentos) ]
     , div [ class "contenedorCuadraditos" ] (map vistaResultado model.resultado) 
   ]
+
+nada : Html msg
+nada = text ""
 
 vistaResultado : Verificacion -> Html Msg
 vistaResultado unaVerificacion = div 
@@ -98,6 +97,6 @@ vistaResultado unaVerificacion = div
 obtenerColor : Verificacion -> String
 obtenerColor unaVerificacion = 
   case unaVerificacion.color of
-      Verde -> "green"
-      Amarillo -> "yellow"
-      Gris -> "grey"
+      LugarCorrecto -> "green"
+      LugarIncorrecto -> "yellow"
+      NoEsta -> "grey"

@@ -5,8 +5,7 @@ import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import String exposing (length, fromChar, fromInt)
-import List exposing (map)
-import VerificarPalabra exposing (..)
+import List exposing (..)
 
 main : Program () Model Msg
 main =

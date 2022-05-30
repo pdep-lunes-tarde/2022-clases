@@ -40,29 +40,12 @@ img {
   flex-direction: column;
 }
 
-.resultado {
-  display: flex;
-  flex-direction: row;
-}
-
 .cuadradito {
   height: 50px;
   width: 50px;
   margin: 10px;
   font-size: 30px;
   color: #ffffff;
-}
-
-.incorrecto {
-  background-color: grey;
-}
-
-.correcto {
-  background-color: green;
-}
-
-.posicionIncorrecta {
-  background-color: yellow;
 }
 
 .contenedorCuadraditos {

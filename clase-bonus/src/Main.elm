@@ -12,15 +12,15 @@ main : Program () Model Msg
 main =
   Browser.sandbox { init = init, update = update, view = view }
 
-type alias Model = String
+type alias Model = ()
 
 type alias Msg = ()
 
 init : Model
-init = "Hola Mundo"
+init = ()
 
 update : Msg -> Model -> Model
 update mensaje modelo = modelo
 
 view : Model -> Html Msg
-view modelo = text modelo
+view modelo = text "Hola Mundo"

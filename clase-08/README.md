@@ -2,7 +2,7 @@
 
 ## Material de la clase
 
-- Clase grabada: _**Proximamente**_
+- Clase grabada: https://drive.google.com/file/d/1VgxciqE4q5zvzXQZVbzfgNf6gqtjsgAd/view?usp=sharing
 - Slides: https://docs.google.com/presentation/d/16vzU5ibuZOkGIEwEsKRFrDmAm21MmgGb55RN11CFlS4/edit?usp=sharing
 - Código: Acá :D.
 

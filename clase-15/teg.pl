@@ -117,7 +117,7 @@ ocupa(arabia, negro).
 ocupa(mongolia, verde).
 ocupa(taimir, verde).
 ocupa(tartaria, verde).
-ocupa(siberia, verde).
+ocupa(siberia, rojo).
 ocupa(kamchatka, verde).
 
 ocupa(italia, verde).
@@ -131,3 +131,70 @@ ocupa(granBretania, rojo).
 ocupa(espania, rojo).
 ocupa(alemania, rojo).
 
+% estaPeleado(Continente):-
+%     continente(Continente),
+%     jugadores(Jugadores),
+%     forall(member(Jugador, Jugadores),
+%            ocupaContinente(Jugador, Continente)).
+
+estaPeleado(Continente):-
+    continente(Continente),
+    forall(jugador(Jugador),
+           ocupaContinente(Jugador, Continente)).
+
+ocupaContinente(Jugador, Continente):-
+    estaEn(Continente, Pais),
+    ocupa(Pais, Jugador).
+
+% - Si un jugador ocupa cierto continente, que es verdad
+% si el jugador ocupa todos los paises del mismo.
+
+ocupaTodoElContinente(Jugador, Continente):-
+    continente(Continente),
+    jugador(Jugador),
+    forall(estaEn(Continente, Pais),
+           ocupa(Pais, Jugador)).
+
+ejercitosQueIncorpora(Jugador, CantidadEjercitos):-
+    ejercitosQueIncorporaPorPaises(Jugador, CantidadEjercitosPorPaises),
+    ejercitosQueIncorporaPorContinentes(Jugador,CantidadEjercitosPorContinentes),
+    CantidadEjercitos is CantidadEjercitosPorPaises + CantidadEjercitosPorContinentes.
+
+ejercitosQueIncorporaPorContinentes(Jugador, CantidadEjercitos):-
+    jugador(Jugador),
+    findall(Cantidad,
+            (
+                ocupaTodoElContinente(Jugador, Continente),
+                bonusPorContinente(Continente, Cantidad)
+            ),
+            Cantidades),
+    sum_list(Cantidades, CantidadEjercitos).
+
+ejercitosQueIncorporaPorPaises(Jugador, CantidadEjercitosPorPaises):-
+    jugador(Jugador),
+    findall(Pais, ocupa(Pais, Jugador), Paises),
+    length(Paises, CantidadPaises),
+    CantidadEjercitosPorPaises is max(3, CantidadPaises // 2).
+%     CantidadEjercitos is CantidadPaises // 2,
+%     maximoEntre(CantidadEjercitos, 3, CantidadEjercitosPorPaises).
+% maximoEntre(UnNumero, OtroNumero, UnNumero):-
+%     UnNumero > OtroNumero.
+% maximoEntre(UnNumero, OtroNumero, OtroNumero):-
+%     OtroNumero >= UnNumero.
+
+seAtrinchero(Jugador):-
+    ocupaContinente(Jugador, Continente),
+    not((ocupaContinente(Jugador, OtroContinente),
+         Continente \= OtroContinente)).
+
+cantidadAtrincherados(CantidadJugadores):-
+    findall(Jugador, seAtrinchero(Jugador), JugadoresAtrincherados),
+    list_to_set(JugadoresAtrincherados, JugadoresAtrincheradosUnicos),
+    length(JugadoresAtrincheradosUnicos, CantidadJugadores).
+
+bonusPorContinente(asia, 7).
+bonusPorContinente(europa, 5).
+bonusPorContinente(americaDelNorte, 5).
+bonusPorContinente(americaDelSur, 3).
+bonusPorContinente(africa, 3).
+bonusPorContinente(oceania, 2).

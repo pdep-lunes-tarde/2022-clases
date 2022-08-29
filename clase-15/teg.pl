@@ -198,3 +198,29 @@ bonusPorContinente(americaDelNorte, 5).
 bonusPorContinente(americaDelSur, 3).
 bonusPorContinente(africa, 3).
 bonusPorContinente(oceania, 2).
+
+calificacion(Profesion,
+             Aptitud,
+             Calificacion).
+
+% notas(Nombre, NotaEncantamiento, NotaHistoriaMagica, NotaDefensaContraArtesOscuras)
+seSacoEn(harry, 6, 7, 10).
+
+aptitud(Persona, nota(encantamiento, Nota)):-
+    seSacoEn(Persona, Nota, _, _).
+aptitud(Persona, nota(historia, Nota)):-
+    seSacoEn(Persona, _, Nota, _).
+aptitud(Persona, nota(defensaContraArtesOscuras, Nota)):-
+    seSacoEn(Persona, _, _, Nota).
+aptitud(sirius, esAnimago).
+aptitud(peter, esAnimago).
+aptitud(harry, quidditch(15, 10)).
+
+profesion(auror, nota(defensaContraArtesOscuras, Nota), Calificacion):- Calificacion is Nota * 7.
+profesion(auror, esAnimago, 40).
+
+profesion(mortifago, nota(defensaContraArtesOscuras, Nota), Calificacion):-
+    defensaContraArtesOscuras >= 10,
+    Calificacion is 20 + Nota.
+profesion(mortifago, nota(defensaContraArtesOscuras, Nota), Nota):-
+    defensaContraArtesOscuras < 10.

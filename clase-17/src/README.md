@@ -43,10 +43,11 @@ Además a Josefa le podemos preguntar cómo se siente, y debe respondernos:
 
 ## Entrenador de pajaritos
 
-Agregamos a nuestro sistema al entrenador, que debe poder entrenar a un pájaro que le indiquemos. Su rutina de entrenamiento es la siguiente:
+Agregamos a nuestro sistema al entrenador, que tiene asignado un pajaro y lo puede entrenar cuando se lo pidamos. Su rutina de entrenamiento es la siguiente:
 * Alimentar al pajarito 10 gramos de alpiste
 * Mandarlo a volar 20 kilómetros
 * Si la energía del pajarito es menor a 20, darle de comer 10 gramos de alpiste, de lo contrario darle de comer 2 gramos.
+También, podemos asignarle un pajaro distinto.
 
 > Hacer que el entrenador entrene a Pepita y luego a Josefa.
 

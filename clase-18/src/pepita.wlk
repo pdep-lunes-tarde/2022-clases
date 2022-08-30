@@ -14,7 +14,7 @@ object pepita {
 		var nuevaEnergia = energia + gramos
 		energia = nuevaEnergia
 	}
-<<<<<<< HEAD
+
 	method nombre() {
 		return "pepita"
 	}
@@ -109,12 +109,3 @@ object beti {
 		return "beti-con-" + companiera.nombreImagen()
 	}
 }
-=======
-}
-
-object josefa {
-	method energia() {
-		return 100
-	}
-}
->>>>>>> ee07cb06cda76ae8c8b1164dcce1bd8b0e9dcb6c

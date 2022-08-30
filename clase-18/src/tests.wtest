@@ -25,7 +25,6 @@ describe "josefa" {
 
 		assert.equals(135, josefa.energia())
 	}
-<<<<<<< HEAD
 	
 	test "esta explotada si la hicimos volar pero no la alimentamos" {
 		josefa.vola(10)
@@ -92,6 +91,4 @@ describe "beti" {
 	}
 }
 
-=======
-}
->>>>>>> ee07cb06cda76ae8c8b1164dcce1bd8b0e9dcb6c
+

@@ -67,7 +67,7 @@ https://www.wollok.org/documentacion/conceptos/
 
 [![Asteroids](https://img.youtube.com/vi/M_yNTQgk2N0/0.jpg)](https://youtu.be/M_yNTQgk2N0 "Asteroids")
 
-[!FINAL FANTASY - INSERT VMJ](https://github.com/pdepviernestm/2021-objetos-tp-integrador-insert-vmj-mat "FINAL FANTASY - INSERT VMJ")
+[FINAL FANTASY - INSERT VMJ](https://github.com/pdepviernestm/2021-objetos-tp-integrador-insert-vmj-mat)
 
 
 - Algunos juegos hechos en Wollok Game:

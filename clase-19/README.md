@@ -23,7 +23,6 @@
 ### Wiki de Uqbar
 
 - [Bloques](https://wiki.uqbar.org/wiki/articles/bloques.html)
-    - Incluye una parte en la que se cuenta como el if se puede implementar como un envío de mensajes :) (**¿Cómo funciona el #ifTrue: y el #ifFalse: de Smalltalk?**).
 
 ### Videos
 

@@ -1,0 +1,56 @@
+import booleanos.*
+
+describe "booleanos" {
+	test "verdadero y verdadero es verdadero" {
+		assert.equals(verdadero,
+						verdadero.y(verdadero))
+	}
+	test "verdadero y falso es falso" {
+		assert.equals(falso,
+						verdadero.y(falso))
+	}
+	test "falso y verdadero es falso" {
+		assert.equals(falso,
+						falso.y(verdadero)
+		)
+	}
+	test "falso y falso es falso" {
+		assert.equals(falso,
+						falso.y(falso)
+		)
+	}
+	test "falso o un valor es ese valor" {
+		assert.equals(verdadero,
+						falso.o(verdadero)
+		)
+	}
+	test "verdadero o un valor es verdadero" {
+		assert.equals(verdadero,
+						verdadero.o(falso)
+		)
+	}
+	test "verdadero negado es falso" {
+		assert.equals(falso, verdadero.negado())
+	}
+	test "falso negado es verdadero" {
+		assert.equals(verdadero, falso.negado())
+	}
+	test "si verdadero y era verdadero, entonces se hace lo que se haya pasado" {
+		var seCorrio = falso
+
+		verdadero.ifVerdadero {
+			seCorrio = verdadero
+		}
+
+		assert.equals(verdadero, seCorrio)
+	}
+	test "si verdadero y era falso, entonces no pasa nada" {
+		var seCorrio = falso
+
+		falso.ifVerdadero {
+			seCorrio = verdadero
+		}
+
+		assert.equals(falso, seCorrio)
+	}
+}

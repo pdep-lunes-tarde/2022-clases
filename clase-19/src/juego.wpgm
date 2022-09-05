@@ -1,0 +1,7 @@
+import golondrinasGame.*
+
+program juego {
+
+	golondrinasGame.jugar()
+
+}

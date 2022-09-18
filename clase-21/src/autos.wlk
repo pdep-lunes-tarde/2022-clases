@@ -3,8 +3,11 @@ import wollok.game.*
 object autos {
 	method jugar() {
 		game.cellSize(55)
-		game.width(12)
+		game.width(10)
 		game.height(20)
+		game.height().times { n =>
+			game.addVisualIn(new SeccionDeCalle(), game.origin().up(n - 1))	
+		}
 		game.addVisual(auto)
 		keyboard.right().onPressDo {
 			auto.moverseADerecha()
@@ -14,6 +17,10 @@ object autos {
 		}
 		game.start()
 	}
+}
+
+class SeccionDeCalle {
+	method image() = "calle.png"
 }
 
 object auto {

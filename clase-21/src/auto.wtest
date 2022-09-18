@@ -1,14 +1,43 @@
 import autos.*
 
-describe "movimiento del auto" {
+describe "movimiento del auto en la calle" {
+	const calle = new Calle(x = 1)
+	const cantidadCarriles = calle.carriles()
+
+	method initialize() {
+		auto.estasEn(calle)
+	}
+	
+	test "al ubicar un auto en una calle, su posicion X es el centro de la calle" {
+		auto.estasEn(calle)
+		
+		assert.equals(4, auto.position().x())
+	}
+
 	test "moverse a la izquierda disminuye su X en 1" { 
 		auto.moverseAIzquierda()
 		
-		assert.equals(-1, auto.position().x())
+		assert.equals(3, auto.position().x())
 	}
 	
 	test "moverse a la derecha aumenta su X en 1" {
 		auto.moverseADerecha()
+		
+		assert.equals(5, auto.position().x())
+	}
+	
+	test "un auto no puede salirse de una calle por derecha" {
+		cantidadCarriles.times { n =>
+			auto.moverseADerecha()
+		}
+		
+		assert.equals(7, auto.position().x())
+	}
+	
+	test "un auto no puede salirse de una calle por izquierda" {
+		cantidadCarriles.times { n =>
+			auto.moverseAIzquierda()
+		}
 		
 		assert.equals(1, auto.position().x())
 	}

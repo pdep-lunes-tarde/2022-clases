@@ -1,0 +1,25 @@
+import autos.*
+
+describe "seccion de calle" {
+	
+	test "empieza en la imagen calle.png" {
+		const seccionDeCalle = new SeccionDeCalle()
+		
+		assert.equals("calle.png", seccionDeCalle.image())
+	}
+
+	test "al avanzar, pasa a la imagen calle2.png" {
+		const seccionDeCalle = new SeccionDeCalle()
+		seccionDeCalle.avanzar()
+	
+		assert.equals("calle-2.png", seccionDeCalle.image())
+	}	
+	
+	test "al volver a avanzar, vuelve a la imagen calle.png" {
+		const seccionDeCalle = new SeccionDeCalle()
+		seccionDeCalle.avanzar()
+		seccionDeCalle.avanzar()
+	
+		assert.equals("calle.png", seccionDeCalle.image())
+	}
+}

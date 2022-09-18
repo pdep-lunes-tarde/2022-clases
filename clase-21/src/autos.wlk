@@ -1,13 +1,13 @@
 import wollok.game.*
 
 object autos {
+	const calle = new Calle(x=1)
 	method jugar() {
 		game.cellSize(55)
 		game.width(10)
 		game.height(20)
-		game.height().times { n =>
-			game.addVisualIn(new SeccionDeCalle(), game.origin().up(n - 1))	
-		}
+		calle.dibujarEn(game)
+		auto.estasEn(calle)
 		game.addVisual(auto)
 		keyboard.right().onPressDo {
 			auto.moverseADerecha()
@@ -19,19 +19,64 @@ object autos {
 	}
 }
 
+class Calle {
+	const property x = 0
+	method carriles() {
+		return 7
+	}
+	
+	method carrilCentral() {
+		return (self.carrilIzquierdo() + self.carrilDerecho()) / 2
+	}
+	method carrilIzquierdo() {
+		return x
+	}
+	method carrilDerecho() {
+		return x + self.carriles() - 1
+	}
+	method dibujarEn(juego) {
+		juego.height().times { n =>
+			const seccion = new SeccionDeCalle()
+			juego.addVisualIn(seccion, game.origin().up(n - 1).right(x))
+			juego.onTick(300,
+						 "avanzarCalle" + n.toString(),
+						 { seccion.avanzar() })
+		}
+	}
+}
+
 class SeccionDeCalle {
-	method image() = "calle.png"
+	var image = "calle.png"
+	method image() = image
+	method avanzar() {
+		if(image == "calle.png") {
+			image = "calle-2.png"
+		} else {
+			image = "calle.png"
+		}
+	}
 }
 
 object auto {
 	var property position = game.at(0, 0)
+	var calle
 	
 	method image() = "auto.png"
 	
+	method moverseHorizontalmente(deltaX) {
+		const nuevaX = (position.x() + deltaX)
+							.min(calle.carrilDerecho())
+							.max(calle.carrilIzquierdo())
+		position = game.at(nuevaX, position.y())
+	}
 	method moverseAIzquierda() {
-		position = position.left(1)
+		self.moverseHorizontalmente(-1)
 	}
 	method moverseADerecha() {
-		position = position.right(1) 
+		self.moverseHorizontalmente(1) 
+	}
+	method estasEn(unaCalle) {
+		calle = unaCalle
+		position = game.at(unaCalle.carrilCentral(), position.y())
 	}
 }

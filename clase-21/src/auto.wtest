@@ -1,0 +1,15 @@
+import autos.*
+
+describe "movimiento del auto" {
+	test "moverse a la izquierda disminuye su X en 1" { 
+		auto.moverseAIzquierda()
+		
+		assert.equals(-1, auto.position().x())
+	}
+	
+	test "moverse a la derecha aumenta su X en 1" {
+		auto.moverseADerecha()
+		
+		assert.equals(1, auto.position().x())
+	}
+}

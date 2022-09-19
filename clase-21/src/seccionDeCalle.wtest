@@ -1,0 +1,24 @@
+import calle.*
+
+describe "animacion de la calle" {
+	test "una seccion de calle empieza con la imagen calle.png" {
+		assert.equals("calle.png", new SeccionDeCalle().image())
+	}
+	
+	test "al alternar su imagen, la seccion de calle devuelve la imagen calle-2.png" {
+		const seccionDeCalle = new SeccionDeCalle()
+		
+		seccionDeCalle.alternarImagen()
+		
+		assert.equals("calle-2.png", seccionDeCalle.image())
+	}
+	
+	test "si se alterna la imagen de nuevo, vuelve a devolver calle.png" {
+		const seccionDeCalle = new SeccionDeCalle()
+		
+		seccionDeCalle.alternarImagen()
+		seccionDeCalle.alternarImagen()
+		
+		assert.equals("calle.png", seccionDeCalle.image())
+	}
+}

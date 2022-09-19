@@ -1,5 +1,13 @@
 class SeccionDeCalle {
-	method image() = "calle.png"
+	var imagen = "calle.png"
+	method alternarImagen() {
+		if(imagen == "calle.png") {
+			imagen = "calle-2.png"
+		} else {
+			imagen = "calle.png"
+		}
+	}
+	method image() = imagen
 }
 
 object calle {
@@ -18,10 +26,15 @@ object calle {
 	}
 	
 	method dibujateEn(unJuego) {
-		unJuego.height().times { n => 
-		unJuego.addVisualIn(new SeccionDeCalle(),
+		unJuego.height().times { n =>
+			const seccionCalle = new SeccionDeCalle() 
+			unJuego.addVisualIn(seccionCalle,
 						    unJuego.at(self.carrilIzquierdo(), n - 1)
-		)
+			)
+			unJuego.onTick(100,
+					"animarCalle",
+					{ seccionCalle.alternarImagen() })
 		}
+
 	}
 }

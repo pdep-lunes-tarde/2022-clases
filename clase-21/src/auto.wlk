@@ -15,11 +15,13 @@ object auto {
 		self.moverseHorizontalmente(-1)
 	}
 	method moverseHorizontalmente(deltaX) {
-		const nuevaX = (position.x() + deltaX).max(calle.positionX()).min(calle.positionX() + calle.cantidadDeCarriles() - 1)
+		const nuevaX = (position.x() + deltaX)
+							.max(calle.carrilIzquierdo())
+							.min(calle.carrilDerecho())
 		position = game.at(nuevaX, position.y())
 	}
 	method ubicarteParaEmpezar() {
-		position = game.at((calle.positionX() + (calle.cantidadDeCarriles())) / 2, 0) 
+		position = game.at(calle.carrilCentral(), 0) 
 	}
 	
 }

@@ -1,26 +1,37 @@
 import auto.*
+import calle.*
 
 describe "movimientos del auto" {
-	const cantidadCarriles = 7
+	const cantidadCarriles = calle.cantidadDeCarriles()
 	
+	method initialize() {
+		calle.positionX(1)
+
+		auto.ubicarteParaEmpezar()
+	}
+	
+	test "la posicion inicial del auto es a la mitad de la calle" {
+		assert.equals(4, auto.position().x())
+	}
+
 	test "si se mueve a la derecha, aumenta su X en 1" {
 		auto.moveteADerecha()
 		
-		assert.equals(2, auto.position().x())
+		assert.equals(5, auto.position().x())
 	}
 	
 	test "si se mueve a la izquierda, disminuye su X en 1" {
 		auto.moveteAIzquierda()
 
-		assert.equals(0, auto.position().x())
+		assert.equals(3, auto.position().x())
 	}
-	//el auto no deberia salirse de la calle
+
 	test "no se puede salir de la calle por la izquierda" {
 		cantidadCarriles.times { n => 
 			auto.moveteAIzquierda()
 		}
 		
-		assert.equals(0, auto.position().x())
+		assert.equals(1, auto.position().x())
 	}
 	
 	test "no se puede salir de la calle por derecha" {
@@ -28,6 +39,6 @@ describe "movimientos del auto" {
 			auto.moveteADerecha()
 		}
 		
-		assert.equals(cantidadCarriles - 1, auto.position().x())
+		assert.equals(7, auto.position().x())
 	}
 }

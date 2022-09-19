@@ -7,8 +7,11 @@ program juego {
 	game.width(9)
 	game.height(10)
 	game.height().times { n => 
-		game.addVisualIn(new SeccionDeCalle(), game.at(0, n - 1))
+		game.addVisualIn(new SeccionDeCalle(),
+						 game.at(calle.positionX(), n - 1)
+		)
 	}
+	auto.ubicarteParaEmpezar()
 	game.addVisual(auto)
 	keyboard.right().onPressDo {
 		auto.moveteADerecha()

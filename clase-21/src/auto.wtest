@@ -1,5 +1,6 @@
 import auto.*
 import calle.*
+import autoAEsquivar.*
 
 describe "movimientos del auto" {
 	const cantidadCarriles = calle.cantidadDeCarriles()
@@ -40,5 +41,23 @@ describe "movimientos del auto" {
 		}
 		
 		assert.equals(7, auto.position().x())
+	}
+}
+
+describe "colisiones del auto" {
+	test "el auto empieza con 3 vidas" {
+		assert.equals(3, auto.vidas())
+	}
+
+	test "si choca con un auto a esquivar, se pierde una vida" {
+		auto.chocaCon(new AutoAEsquivar())
+		
+		assert.equals(2, auto.vidas())
+	}
+	
+	test "si choca con una seccion de la calle no pasa nada" {
+		auto.chocaCon(new SeccionDeCalle())
+		
+		assert.equals(3, auto.vidas())
 	}
 }

@@ -8,6 +8,9 @@ class SeccionDeCalle {
 		}
 	}
 	method image() = imagen
+	method chocasteConAuto(unAuto) {
+		
+	}
 }
 
 object calle {

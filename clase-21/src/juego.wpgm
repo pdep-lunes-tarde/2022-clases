@@ -1,6 +1,8 @@
 import wollok.game.*
 import auto.*
 import calle.*
+import vidas.*
+import autoAEsquivar.*
 
 program juego {
 	game.cellSize(55)
@@ -9,6 +11,11 @@ program juego {
 	calle.dibujateEn(game)
 	auto.ubicarteParaEmpezar()
 	game.addVisual(auto)
+	game.addVisualIn(vidas, game.at(calle.carrilDerecho() + 1, game.height() - 1))
+	game.addVisualIn(new AutoAEsquivar(), auto.position().left(1))
+	game.onCollideDo(auto, {
+		autoAEsquivar => auto.chocaCon(autoAEsquivar)
+	})
 	keyboard.right().onPressDo {
 		auto.moveteADerecha()
 	}

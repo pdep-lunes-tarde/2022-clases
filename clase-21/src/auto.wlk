@@ -2,6 +2,7 @@ import wollok.game.*
 import calle.*
 
 object auto {
+	var vidas = 3
 	var position = game.at(1, 0)
 	method position() {
 		return  position
@@ -22,6 +23,15 @@ object auto {
 	}
 	method ubicarteParaEmpezar() {
 		position = game.at(calle.carrilCentral(), 0) 
+	}
+	method vidas() {
+		return vidas 
+	}
+	method chocaCon(algo) {
+		algo.chocasteConAuto(self)
+	}
+	method perderVida() {
+		vidas -= 1
 	}
 	
 }

@@ -1,5 +1,0 @@
-import autos.*
-
-program juego {
-	autos.jugar()
-}

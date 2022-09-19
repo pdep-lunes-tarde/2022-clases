@@ -17,4 +17,11 @@ object calle {
 		return (self.carrilIzquierdo() + self.carrilDerecho()) / 2
 	}
 	
+	method dibujateEn(unJuego) {
+		unJuego.height().times { n => 
+		unJuego.addVisualIn(new SeccionDeCalle(),
+						    unJuego.at(self.carrilIzquierdo(), n - 1)
+		)
+		}
+	}
 }

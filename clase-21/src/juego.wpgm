@@ -6,11 +6,7 @@ program juego {
 	game.cellSize(55)
 	game.width(9)
 	game.height(10)
-	game.height().times { n => 
-		game.addVisualIn(new SeccionDeCalle(),
-						 game.at(calle.positionX(), n - 1)
-		)
-	}
+	calle.dibujateEn(game)
 	auto.ubicarteParaEmpezar()
 	game.addVisual(auto)
 	keyboard.right().onPressDo {

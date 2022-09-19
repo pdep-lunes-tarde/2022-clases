@@ -1,33 +1,6 @@
-import wollok.game.*
-import auto.*
-import calle.*
-import vidas.*
-import autoAEsquivar.*
+import juegoDeAutos.*
 
 program juego {
-	game.cellSize(55)
-	game.width(9)
-	game.height(10)
-	calle.dibujateEn(game)
-	auto.ubicarteParaEmpezar()
-	game.addVisual(auto)
-	game.addVisualIn(vidas, game.at(calle.carrilDerecho() + 1, game.height() - 1))
-	const autoAEsquivar = new AutoAEsquivar(
-			position=auto.position().up(5)
-		) 
-	game.addVisual(autoAEsquivar)
-	game.onTick(300, "avanzarAuto",
-				{ autoAEsquivar.avanzar() }
-	)
-	game.onCollideDo(auto, {
-		algo => auto.chocaCon(algo)
-	})
-	keyboard.right().onPressDo {
-		auto.moveteADerecha()
-	}
-	keyboard.left().onPressDo {
-		auto.moveteAIzquierda()
-	}
-	game.start()
+	juegoDeAutos.jugar()
 
 }

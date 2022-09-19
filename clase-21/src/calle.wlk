@@ -27,6 +27,9 @@ object calle {
 	method carrilCentral() {
 		return (self.carrilIzquierdo() + self.carrilDerecho()) / 2
 	}
+	method carrilAlAzar() {
+		return self.carrilIzquierdo().randomUpTo(self.carrilDerecho()) 
+	}
 	
 	method dibujateEn(unJuego) {
 		unJuego.height().times { n =>
@@ -40,4 +43,5 @@ object calle {
 		}
 
 	}
+
 }

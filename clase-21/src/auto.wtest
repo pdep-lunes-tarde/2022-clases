@@ -1,6 +1,7 @@
 import auto.*
 import calle.*
 import autoAEsquivar.*
+import wollok.game.*
 
 describe "movimientos del auto" {
 	const cantidadCarriles = calle.cantidadDeCarriles()
@@ -50,7 +51,7 @@ describe "colisiones del auto" {
 	}
 
 	test "si choca con un auto a esquivar, se pierde una vida" {
-		auto.chocaCon(new AutoAEsquivar())
+		auto.chocaCon(new AutoAEsquivar(position = new Position(x=0,y=0)))
 		
 		assert.equals(2, auto.vidas())
 	}

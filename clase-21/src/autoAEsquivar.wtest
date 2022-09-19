@@ -1,0 +1,17 @@
+import wollok.game.*
+import autoAEsquivar.*
+
+describe "movimiento de auto a esquivar" {
+	test "al avanzar, disminuye en 1 su Y" {
+		const auto = new AutoAEsquivar(
+			position=new Position(x=3, y=5)
+		)
+
+		auto.avanzar()
+		
+		assert.equals(
+			new Position(x=3, y=4),
+			auto.position()
+		)
+	}	
+}

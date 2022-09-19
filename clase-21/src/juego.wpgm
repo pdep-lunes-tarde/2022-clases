@@ -12,9 +12,15 @@ program juego {
 	auto.ubicarteParaEmpezar()
 	game.addVisual(auto)
 	game.addVisualIn(vidas, game.at(calle.carrilDerecho() + 1, game.height() - 1))
-	game.addVisualIn(new AutoAEsquivar(), auto.position().left(1))
+	const autoAEsquivar = new AutoAEsquivar(
+			position=auto.position().up(5)
+		) 
+	game.addVisual(autoAEsquivar)
+	game.onTick(300, "avanzarAuto",
+				{ autoAEsquivar.avanzar() }
+	)
 	game.onCollideDo(auto, {
-		autoAEsquivar => auto.chocaCon(autoAEsquivar)
+		algo => auto.chocaCon(algo)
 	})
 	keyboard.right().onPressDo {
 		auto.moveteADerecha()

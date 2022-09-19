@@ -1,0 +1,16 @@
+import auto.*
+
+describe "movimientos del auto" {
+	test "si se mueve a la derecha, aumenta su X en 1" {
+		auto.moveteADerecha()
+		
+		assert.equals(2, auto.position().x())
+	}
+	
+	test "si se mueve a la izquierda, disminuye su X en 1" {
+		auto.moveteAIzquierda()
+
+		assert.equals(0, auto.position().x())
+	}
+	//el auto no deberia salirse de la pantalla
+}

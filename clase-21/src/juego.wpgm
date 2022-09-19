@@ -5,7 +5,13 @@ program juego {
 	game.cellSize(55)
 	game.width(9)
 	game.height(10)
-	game.addVisualIn(auto, game.center())
+	game.addVisual(auto)
+	keyboard.right().onPressDo {
+		auto.moveteADerecha()
+	}
+	keyboard.left().onPressDo {
+		auto.moveteAIzquierda()
+	}
 	game.start()
 
 }

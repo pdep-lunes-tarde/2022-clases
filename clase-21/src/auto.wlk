@@ -8,10 +8,14 @@ object auto {
 	method image() = "auto.png"
 
 	method moveteADerecha() {
-		position = position.right(1) 
+		self.moverseHorizontalmente(1)
 	}
 	method moveteAIzquierda() {
-		position = position.left(1) 
+		self.moverseHorizontalmente(-1)
+	}
+	method moverseHorizontalmente(deltaX) {
+		const nuevaX = (position.x() + deltaX).max(0).min(6)
+		position = game.at(nuevaX, position.y())
 	}
 	
 }

@@ -1,6 +1,8 @@
 import auto.*
 
 describe "movimientos del auto" {
+	const cantidadCarriles = 7
+	
 	test "si se mueve a la derecha, aumenta su X en 1" {
 		auto.moveteADerecha()
 		
@@ -12,5 +14,20 @@ describe "movimientos del auto" {
 
 		assert.equals(0, auto.position().x())
 	}
-	//el auto no deberia salirse de la pantalla
+	//el auto no deberia salirse de la calle
+	test "no se puede salir de la calle por la izquierda" {
+		cantidadCarriles.times { n => 
+			auto.moveteAIzquierda()
+		}
+		
+		assert.equals(0, auto.position().x())
+	}
+	
+	test "no se puede salir de la calle por derecha" {
+		cantidadCarriles.times { n => 
+			auto.moveteADerecha()
+		}
+		
+		assert.equals(cantidadCarriles - 1, auto.position().x())
+	}
 }

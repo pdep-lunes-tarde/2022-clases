@@ -1,10 +1,14 @@
 import wollok.game.*
 import auto.*
+import calle.*
 
 program juego {
 	game.cellSize(55)
 	game.width(9)
 	game.height(10)
+	game.height().times { n => 
+		game.addVisualIn(new SeccionDeCalle(), game.at(0, n - 1))
+	}
 	game.addVisual(auto)
 	keyboard.right().onPressDo {
 		auto.moveteADerecha()

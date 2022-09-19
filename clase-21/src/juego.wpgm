@@ -1,0 +1,11 @@
+import wollok.game.*
+import auto.*
+
+program juego {
+	game.cellSize(55)
+	game.width(9)
+	game.height(10)
+	game.addVisualIn(auto, game.center())
+	game.start()
+
+}

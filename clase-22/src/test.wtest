@@ -1,0 +1,167 @@
+import alquimista.*
+import pocion.*
+
+
+describe "pociones" {
+	test "una pocion vacia tiene 0 ingredientes" {
+		assert.equals(0,
+					  new Pocion().cantidadIngredientes())
+	}
+	
+	test "si a una pocion le agrego un ingrediente, aumenta su cantidad de ingrendientes en 1" {
+		const pocion = new Pocion()
+		pocion.agregarIngrediente(new BigoteDeGato())
+
+		assert.equals(1,
+					 pocion.cantidadIngredientes())
+	}
+	
+	test "la rareza de una pocion vacia es 0" {
+		const pocionVacia = new Pocion()
+		
+		assert.equals(0, pocionVacia.rareza())
+	}
+	
+	test "la rareza de una pocion con un ingrediente es la rareza del ingrediente" {
+		const pocion = new Pocion()
+		
+		pocion.agregarIngrediente(new BigoteDeGato())
+		
+		assert.equals(1, pocion.rareza())
+	}
+	
+	test "la rareza de una pocion con ingredientes es el promedio de las rarezas de sus ingredientes" {
+		const pocion = new Pocion()
+		
+		pocion.agregarIngrediente(new BigoteDeGato())
+		pocion.agregarIngrediente(new Trebol(hojas=4))
+		pocion.agregarIngrediente(new HiedraVenenosa(concentracionDeVeneno=3))
+		
+		assert.equals(8, pocion.rareza())
+	}
+	
+	test "tomar una pocion, aplica los efectos de todos los ingredientes al alquimista que la tome" {
+		const alquimista = new Alquimista(suerte=0, salud=20)
+		const pocion = new Pocion()
+		pocion.agregarIngrediente(new BigoteDeGato())
+		pocion.agregarIngrediente(new Trebol(hojas=4))
+		pocion.agregarIngrediente(new Trebol(hojas=3))
+		pocion.agregarIngrediente(new HiedraVenenosa(concentracionDeVeneno=3))
+		
+		alquimista.tomar(pocion)
+		
+		assert.equals(21, alquimista.suerte())
+		assert.equals(15, alquimista.salud())
+	}
+	
+	test "destilar una pocion la deja con sus ingredientes de rareza mayor a 5" {
+		const pocion = new Pocion()
+		const trebolDe3Hojas = new Trebol(hojas=3)
+		const trebolDe4Hojas = new Trebol(hojas=4)
+		pocion.agregarIngrediente(trebolDe3Hojas)
+		pocion.agregarIngrediente(trebolDe4Hojas)
+		
+		pocion.destilar()
+
+		assert.notThat(
+			pocion.tieneIngrediente(trebolDe3Hojas)
+		)
+		assert.that(
+			pocion.tieneIngrediente(trebolDe4Hojas)
+		)
+	}
+	
+	test "hervir una pocion hierve todos sus ingredientes" {
+		const pocion = new Pocion()
+		const trebol = new Trebol(hojas=4)
+		const hiedraVenenosa = new HiedraVenenosa(concentracionDeVeneno=20)
+		pocion.agregarIngrediente(trebol)
+		pocion.agregarIngrediente(hiedraVenenosa)
+		
+		pocion.hervir()
+		
+		assert.equals(3, trebol.hojas())
+		assert.equals(40, hiedraVenenosa.concentracionDeVeneno())
+	}
+	
+	test "una pocion se puede usar como ingrediente respecto de su rareza" {
+		const pocion = new Pocion()
+		pocion.agregarIngrediente(new BigoteDeGato())
+		pocion.agregarIngrediente(new BigoteDeGato())
+		const otraPocion = new Pocion()
+		otraPocion.agregarIngrediente(new Trebol(hojas=4))
+		otraPocion.agregarIngrediente(pocion)
+
+		assert.equals(10.5, otraPocion.rareza())
+	}
+	
+	//TODO: habria que testear que afectar y hervir tambien funcionen cuando tenemos pociones de pociones
+	
+}
+
+describe "ingredientes" {
+	test "El bigote de gato aumenta la suerte del alquimista en 1 y la salud también en 1" {
+		const alquimista = new Alquimista(suerte=0, salud=0)
+		const bigoteDeGato = new BigoteDeGato()
+		
+		bigoteDeGato.afectar(alquimista)
+
+		assert.equals(1, alquimista.suerte())
+		assert.equals(1, alquimista.salud())
+	}
+	
+	test "Un trebol que no tiene 4 hojas, no afecta de ninguna manera a un alquimista que lo toma" {
+		const alquimista = new Alquimista(suerte=0, salud=0)
+		const trebolDe3Hojas = new Trebol(hojas=3)
+		
+		trebolDe3Hojas.afectar(alquimista)
+
+		assert.equals(0, alquimista.suerte())
+		assert.equals(0, alquimista.salud())
+	}
+	
+	test "un trebol de 4 hojas aumenta la suerte del alquimista en 20" {
+		const alquimista = new Alquimista(suerte=0, salud=0)
+		const trebolDe4Hojas = new Trebol(hojas=4)
+		
+		trebolDe4Hojas.afectar(alquimista)
+
+		assert.equals(20, alquimista.suerte())
+	}
+	
+	test "La hiedra venenosa disminuye la salud del alquimista en 2 * la concentración de veneno que tiene." {
+		const alquimista = new Alquimista(suerte=0, salud=20)
+		const hiedraVenenosa = new HiedraVenenosa(concentracionDeVeneno=5)
+		
+		hiedraVenenosa.afectar(alquimista)
+
+		assert.equals(10, alquimista.salud())
+	}
+	
+	test "hervir un bigote de gato lo deja igual" {
+		const bigoteDeGato = new BigoteDeGato()
+		const alquimista = new Alquimista(suerte=0, salud=0)
+
+		bigoteDeGato.hervir()
+		bigoteDeGato.afectar(alquimista)
+		
+		assert.equals(1, alquimista.salud())
+		assert.equals(1, alquimista.suerte())
+	}
+	
+	test "hervir un trebol hace que pierda una hoja" {
+		const trebol = new Trebol(hojas=6)
+
+		trebol.hervir()
+
+		assert.equals(5, trebol.hojas())
+	}
+	
+	test "hervir una hiedra venenosa duplica su concentracion de veneno" {
+		const hiedraVenenosa = new HiedraVenenosa(concentracionDeVeneno = 10)
+
+		hiedraVenenosa.hervir()
+
+		assert.equals(20, hiedraVenenosa.concentracionDeVeneno())
+	}
+}

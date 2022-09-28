@@ -165,3 +165,48 @@ describe "ingredientes" {
 		assert.equals(20, hiedraVenenosa.concentracionDeVeneno())
 	}
 }
+
+describe "ventas" {
+	test "la cantidad de clientes de un alquimista es la cantidad de alquimistas distintos que le compraron pociones" {
+		const tomi = new Alquimista()
+		const emi = new Alquimista()
+		const juani = new Alquimista()
+		
+		tomi.vender(new Pocion(), emi)
+		tomi.vender(new Pocion(), juani)
+		tomi.vender(new Pocion(), juani)
+		
+		assert.equals(2, tomi.cantidadClientes())
+	}
+	
+	test "un alquimista no es gourmet si vendio alguna pocion de rareza menor a 5" {
+		const tomi = new Alquimista()
+		
+		tomi.vender(new Pocion(), new Alquimista())
+		
+		assert.notThat(tomi.gourmet())
+	}
+	
+	test "un alquimista es gourmet si solo vendio pociones de rareza mayor o igual a 5" {
+		const tomi = new Alquimista()
+		const pocion = new Pocion()
+		pocion.agregarIngrediente(new Trebol(hojas=4))
+		
+		
+		tomi.vender(pocion, new Alquimista())
+		
+		assert.that(tomi.gourmet())
+	}
+	
+	test "el cliente favorito de un alquimista es aquel que le compro mas pociones" {
+		const tomi = new Alquimista()
+		const emi = new Alquimista()
+		const juani = new Alquimista()
+		
+		tomi.vender(new Pocion(), emi)
+		tomi.vender(new Pocion(), juani)
+		tomi.vender(new Pocion(), juani)
+		
+		assert.equals(juani, tomi.clienteFavorito())
+	}
+}

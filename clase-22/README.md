@@ -3,6 +3,7 @@
 ## Material de la clase
 
 - Código: Acá :D.
+- Enunciado del ejercicio: https://docs.google.com/document/d/1vRITVuTDxrvap9Va7sL74aogu9FnoEOVgN0IbplzyPo/edit?usp=sharing
 
 ## ¿Qué mas puedo leer, ver o practicar?
 

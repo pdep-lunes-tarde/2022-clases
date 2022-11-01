@@ -1,4 +1,4 @@
-## Clase 24: Manejo de errores
+## Clase 25: Manejo de errores
 
 ## Material de la clase
 
